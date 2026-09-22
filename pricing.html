@@ -377,6 +377,10 @@
   .neg-cursor.on{opacity:1;}
   @media (hover:none), (pointer:coarse){ .neg-cursor{display:none;} }
 </style>
+<style>
+  /* touch screens: no hover glow on packages (tap made it stick and render as a clipped pink block) */
+  @media (hover:none), (pointer:coarse){ .pkg::before{display:none !important;} }
+</style>
 </head>
 <body>
 <!-- NEGATIVE CURSOR: custom cursor drawn as a fixed element with mix-blend-mode:difference
