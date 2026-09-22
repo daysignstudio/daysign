@@ -215,8 +215,45 @@
     .about-link, .pricing-link{display:none;}
   }
 </style>
+<style>
+  @media (hover:hover) and (pointer:fine){
+    html, body, *, *::before, *::after{cursor:none !important;}
+  }
+  .neg-cursor{
+    position:fixed; left:0; top:0;
+    width:34px; height:34px;
+    margin:-18px 0 0 -18px; /* same hotspot as the old cursor (18,18) */
+    background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAYAAAA6RwvCAAADWElEQVR42rWYzYtPURjHP/fe+dHYEDKhWVGEJC8L8rYQpZRSlmwsFGUndtb+A5KiIcpCsqEIW7FQQilimpq8a/Iyc3/3a/Ocehz3dSanTr/fveftOd/zfb7Pc24iif9QEiBzz4XV6gH/yZAq4yoXG2i5s8L+A/Qb+gPMAo4BG4F3wAXgda0xkrrWtKEtkXRDf5dPklZbW+n4tGZnCdADTgJ3gSvAlggdX1JrWwscAHKrv4D5wBFDI+2CSNjZ9WhnU5K2WZ8sGhOe90oqJOVuTCHpVsW4SkTCztYDB4Ep48Vv49SpBl6NG2Kpmy8Bhus4ltYQbonrk5kRfWCxc0kiFwUYA344Yob5FgFzojVqDQmsfmooZA6VDHhg7VkFIl+AT9FcAHOBeVWGVHEknONhSROOIw8lzTf+JDXe88z6940f4f/yKs+r0pG+WX0JeARsAL4C9xzcqhGtHw4Rz5XB6QhamOSN1TYKGdomu67XpKyFGZPaAkWdTLu2wciw8Pu7amDaMkZ4kWuKJZkjpS858HMmsabfJXgBQ8DSEu/4Bnwu8aZGQ8KC+4Dt5pIjwGiFMV4IB527h5AwBnyv3EhDYDsbSfyYpBUVwSu4/EUn7V7iL9dJfJ0RK22iXNKkpJ/2fLVkwqArCyV9sX6FGy9Jh6zvQNtYE851hYOwZzlGH1hVEjMy63vMiJpH5J0A7nSNNWHxF85TpqxmwLOIX4EbQ8AJt7hf9LYFw6xrYhSO50zEkbeSlkUcCVCfj44iyLokba7jh6TanDVAuwvYBnwErgEfXFvPkNoJ3DdkPBqZJVV7HHJMJ1VMKt4lknr2PCzpvZGz79DI7d2mJjSqvKYsEvckzbZfP+EqSS+jY/Cue7GNEW0NKUt2F0k6LelbiREh9I9JWmDj06Z12kh8YdnVOmANsNWUdkEUGIPHhah9yNQ4a7iCNHIk7GKHpHH9W3InWgGJ4DFH68Sr69EkNtFzm3zSzj42wHNCko53NaLOkIDGMttpv2TxwsURGWr7p2NE3QUriMt3uyDhLky5i6iBYyN2vbxp7/LON+MGty1T11BGJZ2TtLFkTOfa9DUgKOgBYLft9hXwGHhiiOHyjml/WmjzWaIuI8tcLjuzbxYtv48MlHBoRgjE5Q+D1kiboDeNhQAAAABJRU5ErkJggg==") no-repeat center/34px 34px;
+    mix-blend-mode:difference;
+    pointer-events:none;
+    z-index:2147483647;
+    opacity:0;
+    transition:opacity .15s ease;
+    will-change:transform;
+  }
+  .neg-cursor.on{opacity:1;}
+  @media (hover:none), (pointer:coarse){ .neg-cursor{display:none;} }
+</style>
 </head>
 <body>
+<!-- NEGATIVE CURSOR: custom cursor drawn as a fixed element with mix-blend-mode:difference
+     (native CSS cursors can't blend), so it inverts like the logo/nav text -->
+<div class="neg-cursor" id="negCursor" aria-hidden="true"></div>
+<script>
+  (function(){
+    const c = document.getElementById('negCursor');
+    if(!c || !window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+    let x = -100, y = -100, raf = 0;
+    function draw(){ raf = 0; c.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)'; }
+    document.addEventListener('mousemove', e => {
+      x = e.clientX; y = e.clientY;
+      c.classList.add('on');
+      if(!raf) raf = requestAnimationFrame(draw);
+    }, {passive:true});
+    document.addEventListener('mouseleave', () => c.classList.remove('on'));
+    document.addEventListener('mouseenter', () => c.classList.add('on'));
+  })();
+</script>
 
 <header>
   <a href="index.html" class="logo u-link">
@@ -264,42 +301,5 @@
   <a href="index.html#contact" class="project-cta u-link">Let's make your day →</a>
 </section>
 
-<!-- NEGATIVE CURSOR: custom cursor drawn as a fixed element with mix-blend-mode:difference
-     (native CSS cursors can't blend), so it inverts like the logo/nav text -->
-<style>
-  @media (hover:hover) and (pointer:fine){
-    html, body, *, *::before, *::after{cursor:none !important;}
-  }
-  .neg-cursor{
-    position:fixed; left:0; top:0;
-    width:34px; height:34px;
-    margin:-18px 0 0 -18px; /* same hotspot as the old cursor (18,18) */
-    background:url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAYAAAA6RwvCAAADWElEQVR42rWYzYtPURjHP/fe+dHYEDKhWVGEJC8L8rYQpZRSlmwsFGUndtb+A5KiIcpCsqEIW7FQQilimpq8a/Iyc3/3a/Ocehz3dSanTr/fveftOd/zfb7Pc24iif9QEiBzz4XV6gH/yZAq4yoXG2i5s8L+A/Qb+gPMAo4BG4F3wAXgda0xkrrWtKEtkXRDf5dPklZbW+n4tGZnCdADTgJ3gSvAlggdX1JrWwscAHKrv4D5wBFDI+2CSNjZ9WhnU5K2WZ8sGhOe90oqJOVuTCHpVsW4SkTCztYDB4Ep48Vv49SpBl6NG2Kpmy8Bhus4ltYQbonrk5kRfWCxc0kiFwUYA344Yob5FgFzojVqDQmsfmooZA6VDHhg7VkFIl+AT9FcAHOBeVWGVHEknONhSROOIw8lzTf+JDXe88z6940f4f/yKs+r0pG+WX0JeARsAL4C9xzcqhGtHw4Rz5XB6QhamOSN1TYKGdomu67XpKyFGZPaAkWdTLu2wciw8Pu7amDaMkZ4kWuKJZkjpS858HMmsabfJXgBQ8DSEu/4Bnwu8aZGQ8KC+4Dt5pIjwGiFMV4IB527h5AwBnyv3EhDYDsbSfyYpBUVwSu4/EUn7V7iL9dJfJ0RK22iXNKkpJ/2fLVkwqArCyV9sX6FGy9Jh6zvQNtYE851hYOwZzlGH1hVEjMy63vMiJpH5J0A7nSNNWHxF85TpqxmwLOIX4EbQ8AJt7hf9LYFw6xrYhSO50zEkbeSlkUcCVCfj44iyLokba7jh6TanDVAuwvYBnwErgEfXFvPkNoJ3DdkPBqZJVV7HHJMJ1VMKt4lknr2PCzpvZGz79DI7d2mJjSqvKYsEvckzbZfP+EqSS+jY/Cue7GNEW0NKUt2F0k6LelbiREh9I9JWmDj06Z12kh8YdnVOmANsNWUdkEUGIPHhah9yNQ4a7iCNHIk7GKHpHH9W3InWgGJ4DFH68Sr69EkNtFzm3zSzj42wHNCko53NaLOkIDGMttpv2TxwsURGWr7p2NE3QUriMt3uyDhLky5i6iBYyN2vbxp7/LON+MGty1T11BGJZ2TtLFkTOfa9DUgKOgBYLft9hXwGHhiiOHyjml/WmjzWaIuI8tcLjuzbxYtv48MlHBoRgjE5Q+D1kiboDeNhQAAAABJRU5ErkJggg==") no-repeat center/34px 34px;
-    mix-blend-mode:difference;
-    pointer-events:none;
-    z-index:2147483647;
-    opacity:0;
-    transition:opacity .15s ease;
-    will-change:transform;
-  }
-  .neg-cursor.on{opacity:1;}
-  @media (hover:none), (pointer:coarse){ .neg-cursor{display:none;} }
-</style>
-<div class="neg-cursor" id="negCursor" aria-hidden="true"></div>
-<script>
-  (function(){
-    const c = document.getElementById('negCursor');
-    if(!c || !window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
-    let x = -100, y = -100, raf = 0;
-    function draw(){ raf = 0; c.style.transform = 'translate3d(' + x + 'px,' + y + 'px,0)'; }
-    document.addEventListener('mousemove', e => {
-      x = e.clientX; y = e.clientY;
-      c.classList.add('on');
-      if(!raf) raf = requestAnimationFrame(draw);
-    }, {passive:true});
-    document.addEventListener('mouseleave', () => c.classList.remove('on'));
-    document.addEventListener('mouseenter', () => c.classList.add('on'));
-  })();
-</script>
 </body>
 </html>
