@@ -11,12 +11,12 @@
 <meta property="og:site_name" content="Daysign">
 <meta property="og:title" content="Daysign — Wedding, Event & Brand Design Studio">
 <meta property="og:description" content="Hand-drawn identity, invitations and art direction for weddings, celebrations and corporate occasions — designed by a small studio in Copenhagen.">
-<meta property="og:image" content="https://daysign.netlify.app/og-image.png">
-<meta property="og:url" content="https://daysign.netlify.app/">
+<meta property="og:image" content="https://daysign.hello-daysign.workers.dev/og-image.png?v=2">
+<meta property="og:url" content="https://daysign.hello-daysign.workers.dev/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Daysign — Wedding, Event & Brand Design Studio">
 <meta name="twitter:description" content="Hand-drawn identity, invitations and art direction for weddings, celebrations and corporate occasions — designed by a small studio in Copenhagen.">
-<meta name="twitter:image" content="https://daysign.netlify.app/og-image.png">
+<meta name="twitter:image" content="https://daysign.hello-daysign.workers.dev/og-image.png?v=2">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -555,7 +555,7 @@
   .preloader-bg{
     position:fixed;
     inset:0;
-    z-index:6;
+    z-index:60; /* above header/logo/nav/tagline — only the big question sits on top */
     background:#FF1493;
     transition:transform .8s cubic-bezier(.76,0,.24,1);
     will-change:transform;
@@ -574,6 +574,7 @@
   }
   @keyframes blink{50%{opacity:0;}}
   body.is-loading{overflow:hidden;height:100vh;}
+  body.is-loading .question-wrap{z-index:61;}
   body.modal-open{overflow:hidden;}
 
   /* ---------- START A PROJECT MODAL ---------- */
@@ -948,7 +949,6 @@
     const phrase = "Isn't it a sign?";
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    cursorEl.style.display = 'none'; // no blinking caret while the pink screen is still up
 
     const taglineEl = document.getElementById('taglineText');
     const taglineCursor = document.getElementById('taglineCursor');
@@ -973,9 +973,8 @@
       setTimeout(typeT, 200);
     }
 
+    // 1) pink screen up, only the big question types on top of it
     function startTyping(){
-      document.body.classList.remove('is-loading');
-      cursorEl.style.display = '';
       let i = 0;
       function type(){
         if(i <= phrase.length){
@@ -983,9 +982,10 @@
           i++;
           setTimeout(type, 55);
         } else {
+          // 2) phrase finished -> short pause, then slide the pink away
           setTimeout(() => {
             cursorEl.style.display = 'none';
-            typeTagline();
+            bg.classList.add('slide-up');
           }, 550);
         }
       }
@@ -995,17 +995,20 @@
     if(reduced){
       bg.style.display = 'none';
       textEl.textContent = phrase;
+      cursorEl.style.display = 'none';
       document.body.classList.remove('is-loading');
       typeTagline();
       return;
     }
 
+    // 3) pink gone -> unlock page, reveal & type the small tagline
     bg.addEventListener('transitionend', () => {
       bg.style.display = 'none';
-      startTyping();
-    });
+      document.body.classList.remove('is-loading');
+      typeTagline();
+    }, { once: true });
 
-    setTimeout(() => { bg.classList.add('slide-up'); }, 300);
+    setTimeout(startTyping, 400);
   })();
 
   const question = document.getElementById('question');
