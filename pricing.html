@@ -204,6 +204,22 @@
     font-weight:800;
   }
 
+  .pkg-label{
+    position:relative;z-index:1;
+    font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    opacity:.5;margin-top:16px;
+  }
+  .pkg-label + .pkg-includes{margin-top:6px;}
+  .packages{padding-bottom:40px !important;}
+  .pkg-includes{max-width:620px !important;}
+  .pkg-body p.pkg-extra{margin-top:14px;}
+  a.amount{display:inline-block;}
+  .not-sure{
+    padding:60px clamp(20px,5vw,60px) 28px;
+    border-top:1px solid var(--ink);
+  }
+  .not-sure h2{font-size:clamp(24px,3vw,32px);margin-bottom:12px;}
+  .not-sure p{font-size:15px;line-height:1.55;max-width:560px;}
   .price-footnote{
     padding:0 clamp(20px,5vw,60px) 60px;
     font-size:13px;
@@ -418,97 +434,101 @@
     <h1>Pricing.</h1>
   </div>
   <div class="intro-right">
-    <p>Every project at Daysign starts as a conversation, not a checkout — these are starting points to give you a sense of scope, not a locked-in quote. The exact price depends on the illustration, the number of pieces and how much hand-drawn detail goes into it.</p>
-    <p>These numbers are creative and design fees — the work of figuring out the concept, drawing it, and getting it print-ready. Printing and production are quoted separately, on top.</p>
-    <p>Tell us about your day and we'll figure out the right fit together.</p>
+    <p>Clear starting points for custom design, for any occasion. The "Best for" lists are just examples.</p>
+    <p>Not sure which one fits? Tell us what you're planning, and we'll recommend the right one.</p>
   </div>
 </section>
 
 <section class="packages">
-
   <div class="pkg c-magenta">
     <div class="pkg-body">
       <div class="pkg-index">01</div>
       <h3>One Piece</h3>
-      <p>One custom-designed piece, drawn from scratch for your day. A good starting point if you only need a single hero item.</p>
-      <div class="pkg-includes">
-        <span>Invitation</span><span>Menu</span><span>Sign</span><span>Card</span><span>Poster</span><span>Or another single piece</span>
-      </div>
+      <p>One custom-designed piece for your event.</p>
+      <div class="pkg-label">For example</div>
+      <div class="pkg-includes"><span>Invitation</span><span>Menu</span><span>Seating chart</span><span>Welcome sign</span><span>Poster</span><span>Custom illustration</span></div>
+      <div class="pkg-label">Includes</div>
+      <div class="pkg-includes"><span>1 custom design</span><span>Print-ready file</span></div>
     </div>
-    <div class="pkg-price"><span class="from">Starting at</span><span class="amount">2,500 DKK</span></div>
+    <div class="pkg-price"><span class="from">From</span><span class="amount">2,500 DKK</span></div>
   </div>
-
   <div class="pkg c-yellow">
     <div class="pkg-body">
       <div class="pkg-index">02</div>
       <h3>The Essentials</h3>
-      <p>A complete, custom-designed stationery system — not just "more pieces," a set that's built to work together.</p>
-      <div class="pkg-includes">
-        <span>Creative direction</span><span>Invitation</span><span>RSVP / details card</span><span>Envelope</span><span>Custom illustration</span><span>Print-ready artwork</span><span>Revisions</span>
-      </div>
+      <p>The key pieces that bring your event together.</p>
+      <div class="pkg-label">Best for</div>
+      <div class="pkg-includes"><span>Birthdays</span><span>Baby showers</span><span>Christenings</span><span>Konfirmation</span><span>Dinner parties</span><span>Engagements</span></div>
+      <div class="pkg-label">Includes</div>
+      <div class="pkg-includes"><span>Creative direction</span><span>Custom event style</span><span>1 invitation or main piece</span><span>Menu + 1 table piece (e.g. place card)</span><span>1–2 signs</span><span>Custom artwork</span><span>Print-ready files</span></div>
     </div>
-    <div class="pkg-price"><span class="from">Starting at</span><span class="amount">12,000 DKK</span></div>
+    <div class="pkg-price"><span class="from">From</span><span class="amount">12,000 DKK</span></div>
   </div>
-
   <div class="pkg c-green">
     <div class="pkg-body">
       <div class="pkg-index">03</div>
       <h3>The Full Day</h3>
-      <p>A complete visual identity for the whole celebration — one concept, one hand, carried through everything guests see.</p>
-      <div class="pkg-includes">
-        <span>Invitation suite</span><span>Day-of stationery</span><span>Signage</span><span>Custom illustration</span><span>Menus</span><span>Seating charts</span><span>Other visual elements</span>
-      </div>
+      <p>The complete visual identity for your event.</p>
+      <div class="pkg-label">Best for</div>
+      <div class="pkg-includes"><span>Weddings</span><span>Anniversaries</span><span>Milestone birthdays</span><span>Company parties</span><span>Brand dinners</span></div>
+      <div class="pkg-label">Includes</div>
+      <div class="pkg-includes"><span>Creative direction</span><span>Full event identity</span><span>Custom hand-drawn artwork</span><span>Invitation suite (invitation, RSVP, envelope)</span><span>Menu & table stationery</span><span>Seating plan</span><span>Up to 3 signs</span><span>Place cards, tags & small details</span><span>Print-ready files</span></div>
     </div>
-    <div class="pkg-price"><span class="from">Starting at</span><span class="amount">25,000 DKK</span></div>
+    <div class="pkg-price"><span class="from">From</span><span class="amount">25,000 DKK</span></div>
   </div>
-
   <div class="pkg c-ink">
     <div class="pkg-body">
       <div class="pkg-index">04</div>
       <h3>Something Wild</h3>
-      <p>Anything you can imagine, drawn to order — from a full brand identity to a single strange, wonderful request. Let's talk about it.</p>
+      <p>For ideas that don't fit a package.</p>
+      <div class="pkg-label">Best for</div>
+      <div class="pkg-includes"><span>Product launches</span><span>Store openings</span><span>Pop-ups</span><span>Brand activations</span><span>Unusual commissions</span></div>
+      <p class="pkg-extra">Tell us what you're imagining. We'll figure out the right scope together.</p>
     </div>
-    <div class="pkg-price"><span class="from">&nbsp;</span><span class="amount">Let's talk</span></div>
+    <div class="pkg-price"><span class="from">&nbsp;</span><a href="index.html#contact" class="amount u-link">Let's talk →</a></div>
   </div>
-
 </section>
 
-<p class="price-footnote">Prices in DKK, excluding VAT, and reflect typical scope — every quote is confirmed after a short chat about your project. These are creative/design fees; they buy the concept and the craft, not a fixed number of printed objects. Applies across weddings, celebrations and corporate work alike.</p>
+<p class="price-footnote">2 rounds of revisions included · Extra rounds available at an hourly rate · Timeline agreed before we start</p>
 
 <section class="making-real">
   <h2>Making it real</h2>
-  <p>Design is one part of it. We can also take care of getting everything made — from sourcing the right printer to running small batches ourselves in the studio.</p>
+  <p>We design it. We can help make it real, too.<br>Printing and production are quoted separately from design.</p>
 
   <div class="production-grid">
     <div class="production-card">
       <h3>External production</h3>
-      <p>For larger quantities and specialist finishes, Daysign works with trusted printers and craftspeople on your behalf.</p>
+      <p>For larger quantities and specialist finishes.</p>
       <ul>
-        <li>Sourcing printers</li><li>Paper recommendations</li><li>Foil</li><li>Embossing</li><li>Letterpress</li><li>Die cutting</li><li>Larger runs</li><li>Specialist production</li>
+        <li>Printing</li><li>Foil</li><li>Embossing</li><li>Die-cutting</li><li>Large format</li>
       </ul>
       <span class="production-tag">Quoted separately</span>
     </div>
     <div class="production-card">
       <h3>Made in-house</h3>
-      <p>Some pieces are printed and finished directly in our own studio — for smaller quantities, unusual formats and details that don't always make sense for traditional print production.</p>
+      <p>For small runs, unusual formats and hands-on details.</p>
       <ul>
-        <li>Booklets</li><li>Menus</li><li>Cards</li><li>Small-run stationery</li><li>Unusual formats</li><li>Pieces where tactile control matters</li>
+        <li>Menus</li><li>Cards</li><li>Small signs</li><li>Tags</li><li>Special details</li>
       </ul>
       <span class="production-tag">Quoted separately</span>
     </div>
   </div>
 
-  <p class="production-usp">We design it. We make it. We make sure it looks like what we designed.</p>
-
-  <details class="cost-example">
+  <details class="cost-example" open>
     <summary>What does a typical project cost?</summary>
+    <p class="cost-example-note">A typical Essentials project:</p>
     <div class="cost-example-body">
-      <div class="cost-row"><span>Design (The Essentials)</span><span>12,000 DKK</span></div>
-      <div class="cost-row"><span>Production</span><span>~5,000–10,000 DKK</span></div>
-      <div class="cost-row"><span>Estimated total</span><span>~17,000–22,000 DKK</span></div>
+      <div class="cost-row"><span>Design</span><span>12,000 DKK</span></div>
+      <div class="cost-row"><span>Production</span><span>from 5,000 DKK</span></div>
+      <div class="cost-row"><span>Estimated total</span><span>from 17,000 DKK</span></div>
     </div>
-    <p class="cost-example-note">Illustrative only, based on a typical Essentials-scale project — not a quote. Production depends on quantity, paper, finishing and printer, so it's always confirmed separately once we know what you need.</p>
+    <p class="cost-example-note">Production depends on quantity, materials, format and finishing. We quote it once the scope is clear.</p>
   </details>
+</section>
+
+<section class="not-sure">
+  <h2>Not sure which package is right for you?</h2>
+  <p>You don't need to figure it out. Tell us what you're planning, and we'll recommend the right starting point.</p>
 </section>
 
 <div class="cta-row">
