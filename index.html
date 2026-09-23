@@ -699,6 +699,16 @@
     transition:opacity .2s ease;
   }
   .modal-submit:hover{opacity:.85;}
+  .field-input.is-invalid,
+  .chip-group.is-invalid .chip{border-color:var(--magenta);}
+  .form-error{
+    margin-top:12px;
+    font-size:13px;
+    font-weight:600;
+    color:var(--magenta);
+    text-align:center;
+    min-height:1em;
+  }
 
   .modal-thanks{
     display:none;
@@ -915,9 +925,9 @@
     <button type="button" class="modal-close" id="modalClose" aria-label="Close">&times;</button>
     <h2 class="modal-title">Let's make you <span class="accent">a sign.</span></h2>
 
-    <form id="projectForm">
+    <form id="projectForm" novalidate>
       <label class="field-label">Name / Company</label>
-      <input type="text" name="Name / Company" class="field-input" placeholder="Anne & Cas, or your brand">
+      <input type="text" name="Name / Company" class="field-input" placeholder="Anne & Cas, or your brand" required>
 
       <label class="field-label">Project type</label>
       <div class="chip-group" id="chipGroup">
@@ -928,10 +938,10 @@
       </div>
 
       <label class="field-label">Short description</label>
-      <textarea name="Description" class="field-input field-textarea" placeholder="Tell us about the day, the party, the brand…"></textarea>
+      <textarea name="Description" class="field-input field-textarea" placeholder="Tell us about the day, the party, the brand…" required></textarea>
 
       <label class="field-label">Budget range</label>
-      <input type="text" name="Budget range" class="field-input" placeholder="e.g. 10,000–25,000 DKK">
+      <input type="text" name="Budget range" class="field-input" placeholder="e.g. 10,000–25,000 DKK" required>
 
       <label class="field-label">Contact email</label>
       <input type="email" name="Contact email" class="field-input" placeholder="you@email.com" required>
@@ -939,6 +949,7 @@
       <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
 
       <button type="submit" class="modal-submit">Send — we'll be in touch →</button>
+      <p class="form-error" id="formError" role="alert"></p>
     </form>
 
     <p class="modal-thanks" id="modalThanks">Thanks — we'll be in touch soon.</p>
@@ -1194,7 +1205,9 @@
   const thanks = document.getElementById('modalThanks');
   const chips = document.querySelectorAll('.chip');
 
+  let modalOpenedAt = 0;
   function openModal(){
+    modalOpenedAt = Date.now();
     overlay.classList.add('open');
     document.body.classList.add('modal-open');
   }
@@ -1214,8 +1227,23 @@
     chip.addEventListener('click', () => {
       chips.forEach(c => c.classList.remove('active'));
       chip.classList.add('active');
+      document.getElementById('chipGroup').classList.remove('is-invalid');
     });
   });
+
+  const formError = document.getElementById('formError');
+  const chipGroup = document.getElementById('chipGroup');
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  // clear the red outline as soon as a field is filled in
+  form.querySelectorAll('.field-input').forEach(inp => {
+    inp.addEventListener('input', () => { inp.classList.remove('is-invalid'); formError.textContent = ''; });
+  });
+
+  function showSent(){
+    form.classList.add('hide');
+    thanks.classList.add('show');
+  }
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -1224,27 +1252,51 @@
     const submitBtn = form.querySelector('.modal-submit');
     const originalBtnText = submitBtn.textContent;
 
+    // ---- anti-bot: hidden honeypot filled, or form sent faster than a human could -> pretend success, send nothing
+    const honey = form.querySelector('input[name="_honey"]');
+    if((honey && honey.value) || (Date.now() - modalOpenedAt < 3000)){
+      showSent();
+      return;
+    }
+
+    // ---- all fields required
+    let ok = true;
+    form.querySelectorAll('.field-input[required]').forEach(inp => {
+      const v = inp.value.trim();
+      const bad = !v || (inp.type === 'email' && !emailRe.test(v));
+      inp.classList.toggle('is-invalid', bad);
+      if(bad) ok = false;
+    });
+    chipGroup.classList.toggle('is-invalid', !activeChip);
+    if(!activeChip) ok = false;
+    if(!ok){
+      formError.textContent = 'Please fill in all fields (and check your email address).';
+      return;
+    }
+    formError.textContent = '';
+
     const data = new FormData(form);
-    data.set('Project type', activeChip ? activeChip.dataset.value : 'Not specified');
+    data.set('Project type', activeChip.dataset.value);
     data.set('_subject', "New enquiry from Daysign's site");
+    data.set('_template', 'table');
+    data.set('_blacklist', 'casino, crypto, bitcoin, forex, seo services, backlinks, viagra, loan, betting, porn');
 
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending…';
 
-    fetch('https://formsubmit.co/ajax/hello.daysign@gmail.com', {
+    fetch('https://formsubmit.co/ajax/301be77763ffe0bd7280779fe4060473', {
       method: 'POST',
       headers: {'Accept': 'application/json'},
       body: data,
     })
       .then((res) => {
         if(!res.ok) throw new Error('Request failed');
-        form.classList.add('hide');
-        thanks.classList.add('show');
+        showSent();
       })
       .catch(() => {
         submitBtn.disabled = false;
         submitBtn.textContent = originalBtnText;
-        alert("Something went wrong sending that — mind trying again, or emailing hello@daysign.studio directly?");
+        formError.textContent = "Something went wrong — try again, or email hello@daysign.studio directly.";
       });
   });
 </script>
