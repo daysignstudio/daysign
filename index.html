@@ -1279,7 +1279,6 @@
     data.set('Project type', activeChip.dataset.value);
     data.set('_subject', "New enquiry from Daysign's site");
     data.set('_template', 'table');
-    data.set('_blacklist', 'casino, crypto, bitcoin, forex, seo services, backlinks, viagra, loan, betting, porn');
 
     submitBtn.disabled = true;
     submitBtn.textContent = 'Sending…';
@@ -1289,11 +1288,18 @@
       headers: {'Accept': 'application/json'},
       body: data,
     })
-      .then((res) => {
-        if(!res.ok) throw new Error('Request failed');
+      .then((res) => res.json().catch(() => ({})).then((json) => ({ res, json })))
+      .then(({ res, json }) => {
+        // FormSubmit can answer 200 with success:"false" (e.g. form not activated for this domain)
+        const ok = res.ok && String(json.success) === 'true';
+        if(!ok){
+          console.warn('FormSubmit response:', res.status, json);
+          throw new Error(json.message || 'Request failed');
+        }
         showSent();
       })
-      .catch(() => {
+      .catch((err) => {
+        console.warn('Form send failed:', err);
         submitBtn.disabled = false;
         submitBtn.textContent = originalBtnText;
         formError.textContent = "Something went wrong — try again, or email hello@daysign.studio directly.";
