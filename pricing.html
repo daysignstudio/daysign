@@ -366,6 +366,16 @@
     color:var(--ink);
   }
   .site-footer a{font-weight:600;color:var(--ink);}
+  .currency-switch{
+    display:inline-flex;align-self:flex-start;
+    border:1.5px solid var(--ink);border-radius:999px;padding:3px;gap:2px;margin-top:6px;
+  }
+  .currency-switch button{
+    border:none;background:transparent;font-family:inherit;font-size:13px;font-weight:700;
+    padding:7px 14px;border-radius:999px;color:var(--ink);
+    transition:background .2s ease,color .2s ease;
+  }
+  .currency-switch button.active{background:var(--ink);color:var(--paper);}
 
   @media (max-width: 720px){
     .intro{grid-template-columns:1fr;gap:24px;}
@@ -436,6 +446,11 @@
   <div class="intro-right">
     <p>Clear starting points for custom design, for any occasion. The "Best for" lists are just examples.</p>
     <p>Not sure which one fits? Tell us what you're planning, and we'll recommend the right one.</p>
+    <p>Working from Copenhagen and London — across Denmark, the UK and beyond.</p>
+    <div class="currency-switch" role="group" aria-label="Currency">
+      <button type="button" data-cur="dkk" class="active">DKK</button>
+      <button type="button" data-cur="gbp">£ GBP</button>
+    </div>
   </div>
 </section>
 
@@ -450,7 +465,7 @@
       <div class="pkg-label">Includes</div>
       <div class="pkg-includes"><span>1 custom design</span><span>Print-ready file</span></div>
     </div>
-    <div class="pkg-price"><span class="from">From</span><span class="amount">2,500 DKK</span></div>
+    <div class="pkg-price"><span class="from">From</span><span class="amount" data-dkk="2,500 DKK" data-gbp="£300">2,500 DKK</span></div>
   </div>
   <div class="pkg c-yellow">
     <div class="pkg-body">
@@ -462,7 +477,7 @@
       <div class="pkg-label">Includes</div>
       <div class="pkg-includes"><span>Creative direction</span><span>Custom event style</span><span>1 invitation or main piece</span><span>Menu + 1 table piece (e.g. place card)</span><span>1–2 signs</span><span>Custom artwork</span><span>Print-ready files</span></div>
     </div>
-    <div class="pkg-price"><span class="from">From</span><span class="amount">12,000 DKK</span></div>
+    <div class="pkg-price"><span class="from">From</span><span class="amount" data-dkk="12,000 DKK" data-gbp="£1,400">12,000 DKK</span></div>
   </div>
   <div class="pkg c-green">
     <div class="pkg-body">
@@ -474,7 +489,7 @@
       <div class="pkg-label">Includes</div>
       <div class="pkg-includes"><span>Creative direction</span><span>Full event identity</span><span>Custom hand-drawn artwork</span><span>Invitation suite (invitation, RSVP, envelope)</span><span>Menu & table stationery</span><span>Seating plan</span><span>Up to 3 signs</span><span>Place cards, tags & small details</span><span>Print-ready files</span></div>
     </div>
-    <div class="pkg-price"><span class="from">From</span><span class="amount">25,000 DKK</span></div>
+    <div class="pkg-price"><span class="from">From</span><span class="amount" data-dkk="25,000 DKK" data-gbp="£2,900">25,000 DKK</span></div>
   </div>
   <div class="pkg c-ink">
     <div class="pkg-body">
@@ -518,9 +533,9 @@
     <summary>What does a typical project cost?</summary>
     <p class="cost-example-note">A typical Essentials project:</p>
     <div class="cost-example-body">
-      <div class="cost-row"><span>Design</span><span>12,000 DKK</span></div>
-      <div class="cost-row"><span>Production</span><span>from 5,000 DKK</span></div>
-      <div class="cost-row"><span>Estimated total</span><span>from 17,000 DKK</span></div>
+      <div class="cost-row"><span>Design</span><span data-dkk="12,000 DKK" data-gbp="£1,400">12,000 DKK</span></div>
+      <div class="cost-row"><span>Production</span><span data-dkk="from 5,000 DKK" data-gbp="from £600">from 5,000 DKK</span></div>
+      <div class="cost-row"><span>Estimated total</span><span data-dkk="from 17,000 DKK" data-gbp="from £2,000">from 17,000 DKK</span></div>
     </div>
     <p class="cost-example-note">Production depends on quantity, materials, format and finishing. We quote it once the scope is clear.</p>
   </details>
@@ -536,9 +551,30 @@
 </div>
 
 <footer class="site-footer">
-  <span>© 2026 Daysign Studio</span>
+  <span>© 2026 Daysign Studio · Copenhagen &amp; London</span>
   <span><a href="mailto:hello@daysign.studio" class="u-link">hello@daysign.studio</a></span>
 </footer>
 
+<script>
+  // DKK / GBP switch — UK visitors (London time zone or en-GB) see pounds first; choice is remembered
+  (function(){
+    const btns = document.querySelectorAll('.currency-switch button');
+    const els = document.querySelectorAll('[data-dkk][data-gbp]');
+    function set(cur){
+      els.forEach(el => { el.textContent = el.dataset[cur]; });
+      btns.forEach(b => b.classList.toggle('active', b.dataset.cur === cur));
+      try{ localStorage.setItem('daysign-cur', cur); }catch(e){}
+    }
+    btns.forEach(b => b.addEventListener('click', () => set(b.dataset.cur)));
+    let cur = null;
+    try{ cur = localStorage.getItem('daysign-cur'); }catch(e){}
+    if(!cur){
+      const tz = (Intl.DateTimeFormat().resolvedOptions().timeZone || '');
+      const lang = (navigator.language || '').toLowerCase();
+      cur = (tz === 'Europe/London' || lang === 'en-gb') ? 'gbp' : 'dkk';
+    }
+    set(cur);
+  })();
+</script>
 </body>
 </html>
