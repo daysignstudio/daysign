@@ -14,6 +14,9 @@
 <meta property="og:title" content="Daysign — Wedding Stationery, Invitations &amp; Event Design | Copenhagen &amp; London">
 <meta property="og:description" content="Hand-drawn wedding stationery, invitations, signage and event identities for weddings, celebrations and corporate events. A small design &amp; print studio in Copenhagen and London.">
 <meta property="og:image" content="https://daysign.studio/og-image.png?v=2">
+<link rel="alternate" hreflang="en" href="https://daysign.studio/">
+<link rel="alternate" hreflang="da" href="https://daysign.studio/da/">
+<link rel="alternate" hreflang="x-default" href="https://daysign.studio/">
 <link rel="canonical" href="https://daysign.studio/">
 <meta property="og:url" content="https://daysign.studio/">
 <meta name="twitter:card" content="summary_large_image">
@@ -409,9 +412,12 @@
     border-top:1px solid #ececec;
     padding:70px clamp(16px,3vw,36px) 40px;
   }
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
+  .mf-links{display:flex;flex-direction:column;gap:6px;}
+  .mf-links a{font-size:15px;font-weight:600;}
   .mf-top{
     display:grid;
-    grid-template-columns:1.4fr 1fr 1fr;
+    grid-template-columns:1.4fr 1fr 1fr 1fr;
     gap:40px;
     padding-bottom:10px;
   }
@@ -919,6 +925,7 @@
 </header>
 
 <!-- ================= HERO ================= -->
+<h1 class="sr-only">Daysign — wedding stationery, invitations and event design &amp; print studio in Copenhagen and London</h1>
 <section class="hero">
   <video class="hero-bg-video" autoplay muted loop playsinline>
     <source type="video/webm" src="/media/daysign-hero.webm" type="video/webm">
@@ -1052,6 +1059,16 @@
       <a href="mailto:hello@daysign.studio" class="mf-link u-link">hello@daysign.studio</a>
     </div>
     <div class="mf-col">
+      <h4>What we make</h4>
+      <div class="mf-links">
+        <a href="/wedding-stationery" class="u-link">Wedding stationery</a>
+        <a href="/event-design" class="u-link">Event design &amp; print</a>
+        <a href="/party-invitations" class="u-link">Party invitations</a>
+        <a href="/faq" class="u-link">FAQ</a>
+        <a href="/da/" class="u-link">Dansk</a>
+      </div>
+    </div>
+    <div class="mf-col">
       <h4>Follow along</h4>
       <p>Behind the scenes & new work.</p>
       <a href="https://www.instagram.com/itsdaysign/" target="_blank" rel="noopener" class="mf-link u-link">Instagram</a>
@@ -1131,6 +1148,7 @@
     <a href="pricing.html" class="pricing-link u-link">Pricing</a>
     <a href="about.html" class="about-link u-link">About</a>
     <a href="faq.html" class="about-link faq-link u-link">FAQ</a>
+    <a href="/da/" class="about-link lang-link u-link">Dansk</a>
   </div>
 </div>
 

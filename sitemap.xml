@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://daysign.studio/</loc><lastmod>2026-10-27</lastmod></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url><loc>https://daysign.studio/</loc><lastmod>2026-10-27</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://daysign.studio/"/><xhtml:link rel="alternate" hreflang="da" href="https://daysign.studio/da/"/></url>
   <url><loc>https://daysign.studio/about</loc><lastmod>2026-10-27</lastmod></url>
-  <url><loc>https://daysign.studio/pricing</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://daysign.studio/pricing</loc><lastmod>2026-10-27</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://daysign.studio/pricing"/><xhtml:link rel="alternate" hreflang="da" href="https://daysign.studio/da/priser"/></url>
+  <url><loc>https://daysign.studio/faq</loc><lastmod>2026-10-27</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://daysign.studio/faq"/><xhtml:link rel="alternate" hreflang="da" href="https://daysign.studio/da/faq"/></url>
+  <url><loc>https://daysign.studio/wedding-stationery</loc><lastmod>2026-10-27</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://daysign.studio/wedding-stationery"/><xhtml:link rel="alternate" hreflang="da" href="https://daysign.studio/da/bryllup"/></url>
+  <url><loc>https://daysign.studio/event-design</loc><lastmod>2026-10-27</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://daysign.studio/event-design"/><xhtml:link rel="alternate" hreflang="da" href="https://daysign.studio/da/firmaevent"/></url>
+  <url><loc>https://daysign.studio/party-invitations</loc><lastmod>2026-10-27</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://daysign.studio/party-invitations"/><xhtml:link rel="alternate" hreflang="da" href="https://daysign.studio/da/fest"/></url>
   <url><loc>https://daysign.studio/project</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://daysign.studio/project-2</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://daysign.studio/project-3</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://daysign.studio/project-4</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://daysign.studio/project-5</loc><lastmod>2026-10-27</lastmod></url>
   <url><loc>https://daysign.studio/project-6</loc><lastmod>2026-10-27</lastmod></url>
-  <url><loc>https://daysign.studio/faq</loc><lastmod>2026-10-27</lastmod></url>
+  <url><loc>https://daysign.studio/da/</loc><lastmod>2026-10-27</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://daysign.studio/"/><xhtml:link rel="alternate" hreflang="da" href="https://daysign.studio/da/"/></url>
+  <url><loc>https://daysign.studio/da/bryllup</loc><lastmod>2026-10-27</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://daysign.studio/wedding-stationery"/><xhtml:link rel="alternate" hreflang="da" href="https://daysign.studio/da/bryllup"/></url>
+  <url><loc>https://daysign.studio/da/firmaevent</loc><lastmod>2026-10-27</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://daysign.studio/event-design"/><xhtml:link rel="alternate" hreflang="da" href="https://daysign.studio/da/firmaevent"/></url>
+  <url><loc>https://daysign.studio/da/fest</loc><lastmod>2026-10-27</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://daysign.studio/party-invitations"/><xhtml:link rel="alternate" hreflang="da" href="https://daysign.studio/da/fest"/></url>
+  <url><loc>https://daysign.studio/da/priser</loc><lastmod>2026-10-27</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://daysign.studio/pricing"/><xhtml:link rel="alternate" hreflang="da" href="https://daysign.studio/da/priser"/></url>
+  <url><loc>https://daysign.studio/da/faq</loc><lastmod>2026-10-27</lastmod><xhtml:link rel="alternate" hreflang="en" href="https://daysign.studio/faq"/><xhtml:link rel="alternate" hreflang="da" href="https://daysign.studio/da/faq"/></url>
 </urlset>
