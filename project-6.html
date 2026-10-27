@@ -270,6 +270,32 @@
  ]
 }
 </script>
+<style>
+  /* EN / DA language switch — a small lever */
+  .lang-switch{position:relative;display:inline-flex;align-items:center;flex:none;
+    border:1.5px solid var(--ink);border-radius:999px;padding:3px;background:var(--paper);
+    font-family:'Inter Tight',sans-serif;font-size:12px;font-weight:700;letter-spacing:.06em;color:var(--ink);text-decoration:none;}
+  .lang-switch .ls-opt{position:relative;z-index:1;width:34px;line-height:26px;text-align:center;transition:color .25s ease;}
+  .lang-switch .ls-knob{position:absolute;top:3px;left:3px;width:34px;height:26px;border-radius:999px;background:var(--ink);
+    transition:transform .28s cubic-bezier(.65,0,.35,1);}
+  .lang-switch .ls-opt[data-l="en"]{color:var(--paper);}
+  .lang-switch.is-da .ls-knob{transform:translateX(34px);}
+  .lang-switch.is-da .ls-opt[data-l="en"]{color:var(--ink);}
+  .lang-switch.is-da .ls-opt[data-l="da"]{color:var(--paper);}
+  .lang-switch:hover .ls-knob{box-shadow:0 0 0 2px rgba(255,20,147,.35);}
+  header .lang-switch{pointer-events:auto;}
+  @media (max-width:720px){ .nav-wrap{gap:10px !important;} }
+  /* lever-mobile */
+  @media (max-width:720px){
+    .lang-switch{font-size:11px;padding:2px;}
+    .lang-switch .ls-opt{width:28px;line-height:24px;}
+    .lang-switch .ls-knob{top:2px;left:2px;width:28px;height:24px;}
+    .lang-switch.is-da .ls-knob{transform:translateX(28px);}
+    header .logo{height:30px !important;}
+    header .cta{font-size:12px !important;padding:8px 12px !important;white-space:nowrap;}
+    header{padding-left:16px !important;padding-right:16px !important;gap:10px;}
+  }
+</style>
 </head>
 <body>
 <!-- NEGATIVE CURSOR: custom cursor drawn as a fixed element with mix-blend-mode:difference
@@ -299,7 +325,7 @@
     <a href="pricing.html" class="pricing-link u-link">Pricing</a>
     <a href="about.html" class="about-link u-link">About</a>
     <a href="faq.html" class="about-link faq-link u-link">FAQ</a>
-    <a href="/da/" class="about-link lang-link u-link">Dansk</a>
+    <a href="/da/" class="lang-switch" hreflang="da" aria-label="Skift til dansk"><span class="ls-opt" data-l="en">EN</span><span class="ls-opt" data-l="da">DA</span><span class="ls-knob" aria-hidden="true"></span></a>
     <a href="index.html" class="cta">← Back to work</a>
   </div>
 </header>
@@ -328,5 +354,14 @@
   <a href="index.html#contact" class="project-cta u-link">Let's make your day →</a>
 </section>
 
+<script>
+  // flip the lever first, then go to the other language
+  document.querySelectorAll('.lang-switch').forEach(function(sw){
+    sw.addEventListener('click', function(e){
+      e.preventDefault(); sw.classList.toggle('is-da');
+      var href = sw.getAttribute('href'); setTimeout(function(){ location.href = href; }, 280);
+    });
+  });
+</script>
 </body>
 </html>
