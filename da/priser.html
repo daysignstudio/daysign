@@ -586,6 +586,15 @@
     header{padding-left:16px !important;padding-right:16px !important;gap:10px;}
   }
 </style>
+<style>
+  .testimonials{padding:10px clamp(20px,5vw,60px) 80px;}
+  .t-label{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:22px;}
+  .t-item{margin:0;max-width:760px;position:relative;padding-left:44px;}
+  .t-item::before{content:"\201C";position:absolute;left:0;top:-14px;font-size:72px;line-height:1;font-weight:800;color:var(--magenta);}
+  .t-item blockquote{margin:0;font-size:clamp(20px,2.4vw,28px);line-height:1.35;font-weight:600;letter-spacing:-0.01em;}
+  .t-item figcaption{margin-top:16px;font-size:14px;font-weight:700;}
+  @media (max-width:720px){ .t-item{padding-left:34px;} .t-item::before{font-size:56px;} }
+</style>
 </head>
 <body>
 <!-- NEGATIVE CURSOR: custom cursor drawn as a fixed element with mix-blend-mode:difference
@@ -686,6 +695,15 @@
 </section>
 
 <p class="price-footnote">2 rettelsesrunder inkluderet · Ekstra runder mod timepris · Tidsplan aftales inden start</p>
+
+
+<section class="testimonials">
+  <div class="t-label">Det siger vores kunder</div>
+  <figure class="t-item">
+    <blockquote>They understood exactly what we wanted. The cards turned out even better than we imagined, and guests kept asking who designed them.</blockquote>
+    <figcaption>Anne Jensen</figcaption>
+  </figure>
+</section>
 
 <section class="making-real">
   <h2>Fra design til tryk</h2>

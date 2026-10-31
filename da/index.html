@@ -677,6 +677,7 @@
   }
   .field-input::placeholder{color:#a6a6a6;}
   .field-input:focus{border-color:var(--ink);background:rgba(255,255,255,0.9);}
+  .field-select{appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--ink) 50%),linear-gradient(135deg,var(--ink) 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 14px) 50%;background-size:6px 6px,6px 6px;background-repeat:no-repeat;padding-right:40px;}
   .field-textarea{resize:vertical;min-height:90px;font-family:inherit;}
 
   .chip-group{display:flex;flex-wrap:wrap;gap:10px;}
@@ -1134,19 +1135,25 @@
       <label class="field-label">Kort beskrivelse</label>
       <textarea name="Description" class="field-input field-textarea" placeholder="Fortæl os om dagen, festen eller brandet…" required></textarea>
 
-      <label class="field-label">Budget</label>
-      <input type="text" name="Budget range" class="field-input" placeholder="fx 10.000–25.000 kr." required>
+      <label class="field-label">Budget (valgfrit)</label>
+      <select name="Budget range" class="field-input field-select">
+        <option value="Not sure yet">Ved ikke endnu</option>
+        <option value="Under 5,000 DKK / £600">Under 5.000 kr.</option>
+        <option value="5,000 to 15,000 DKK / £600 to £1,800">5.000 til 15.000 kr.</option>
+        <option value="15,000 to 30,000 DKK / £1,800 to £3,500">15.000 til 30.000 kr.</option>
+        <option value="30,000+ DKK / £3,500+">30.000+ kr.</option>
+      </select>
 
       <label class="field-label">E-mail</label>
       <input type="email" name="Contact email" class="field-input" placeholder="dig@email.dk" required>
 
       <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
 
-      <button type="submit" class="modal-submit">Send — vi vender tilbage →</button>
+      <button type="submit" class="modal-submit">Send, så vender vi tilbage →</button>
       <p class="form-error" id="formError" role="alert"></p>
     </form>
 
-    <p class="modal-thanks" id="modalThanks">Tak — vi vender tilbage snarest.</p>
+    <p class="modal-thanks" id="modalThanks">Tak! Vi vender tilbage snarest.</p>
   </div>
 </div>
 
@@ -1497,7 +1504,7 @@
         console.warn('Form send failed:', err);
         submitBtn.disabled = false;
         submitBtn.textContent = originalBtnText;
-        formError.textContent = "Noget gik galt — prøv igen, eller skriv direkte til hello@daysign.studio.";
+        formError.textContent = "Noget gik galt. Prøv igen eller skriv direkte til hello@daysign.studio.";
       });
   });
 </script>

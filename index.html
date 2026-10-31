@@ -676,6 +676,7 @@
   }
   .field-input::placeholder{color:#a6a6a6;}
   .field-input:focus{border-color:var(--ink);background:rgba(255,255,255,0.9);}
+  .field-select{appearance:none;-webkit-appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--ink) 50%),linear-gradient(135deg,var(--ink) 50%,transparent 50%);background-position:calc(100% - 20px) 50%,calc(100% - 14px) 50%;background-size:6px 6px,6px 6px;background-repeat:no-repeat;padding-right:40px;}
   .field-textarea{resize:vertical;min-height:90px;font-family:inherit;}
 
   .chip-group{display:flex;flex-wrap:wrap;gap:10px;}
@@ -1133,19 +1134,25 @@
       <label class="field-label">Short description</label>
       <textarea name="Description" class="field-input field-textarea" placeholder="Tell us about the day, the party, the brand…" required></textarea>
 
-      <label class="field-label">Budget range</label>
-      <input type="text" name="Budget range" class="field-input" placeholder="e.g. 10,000–25,000 DKK or £1,500–3,000" required>
+      <label class="field-label">Budget range (optional)</label>
+      <select name="Budget range" class="field-input field-select">
+        <option value="Not sure yet">Not sure yet</option>
+        <option value="Under 5,000 DKK / £600">Under 5,000 DKK / £600</option>
+        <option value="5,000 to 15,000 DKK / £600 to £1,800">5,000 to 15,000 DKK / £600 to £1,800</option>
+        <option value="15,000 to 30,000 DKK / £1,800 to £3,500">15,000 to 30,000 DKK / £1,800 to £3,500</option>
+        <option value="30,000+ DKK / £3,500+">30,000+ DKK / £3,500+</option>
+      </select>
 
       <label class="field-label">Contact email</label>
       <input type="email" name="Contact email" class="field-input" placeholder="you@email.com" required>
 
       <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
 
-      <button type="submit" class="modal-submit">Send — we'll be in touch →</button>
+      <button type="submit" class="modal-submit">Send and we'll be in touch →</button>
       <p class="form-error" id="formError" role="alert"></p>
     </form>
 
-    <p class="modal-thanks" id="modalThanks">Thanks — we'll be in touch soon.</p>
+    <p class="modal-thanks" id="modalThanks">Thanks! We'll be in touch soon.</p>
   </div>
 </div>
 
@@ -1496,7 +1503,7 @@
         console.warn('Form send failed:', err);
         submitBtn.disabled = false;
         submitBtn.textContent = originalBtnText;
-        formError.textContent = "Something went wrong — try again, or email hello@daysign.studio directly.";
+        formError.textContent = "Something went wrong. Try again or email hello@daysign.studio directly.";
       });
   });
 </script>
