@@ -594,6 +594,16 @@
   .t-item figcaption{margin-top:16px;font-size:14px;font-weight:700;}
   @media (max-width:720px){ .t-item{padding-left:34px;} .t-item::before{font-size:56px;} }
 </style>
+<style>
+  .process{padding:10px clamp(20px,5vw,60px) 70px;}
+  .process-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:24px;}
+  .process-steps li{border-top:1.5px solid var(--ink);padding-top:16px;}
+  .ps-num{display:block;font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--magenta);margin-bottom:10px;}
+  .process-steps h3{font-size:20px;font-weight:800;letter-spacing:-0.01em;margin:0 0 8px;}
+  .process-steps p{font-size:14px;line-height:1.55;margin:0;max-width:260px;}
+  @media (max-width:900px){ .process-steps{grid-template-columns:1fr 1fr;} }
+  @media (max-width:560px){ .process-steps{grid-template-columns:1fr;} }
+</style>
 </head>
 <body>
 <!-- NEGATIVE CURSOR: custom cursor drawn as a fixed element with mix-blend-mode:difference
@@ -695,6 +705,16 @@
 
 <p class="price-footnote">2 rounds of revisions included · Extra rounds available at an hourly rate · Timeline agreed before we start</p>
 
+
+<section class="process">
+  <div class="t-label">How we work</div>
+  <ol class="process-steps">
+    <li><span class="ps-num">01</span><h3>Call</h3><p>We talk about your event: the date, the mood and what you need.</p></li>
+    <li><span class="ps-num">02</span><h3>Moodboard &amp; idea</h3><p>We present a moodboard and the concept for your event.</p></li>
+    <li><span class="ps-num">03</span><h3>2 rounds of revisions</h3><p>We refine the design together, with a call for each round.</p></li>
+    <li><span class="ps-num">04</span><h3>Print</h3><p>We prepare print-ready files and can take care of printing.</p></li>
+  </ol>
+</section>
 
 <section class="testimonials">
   <div class="t-label">What clients say</div>
